@@ -1,0 +1,178 @@
+<%- include('./header.ejs');%>
+
+	<div class="content container-fluid">
+		<!-- Page Header -->
+		<div class="page-header">
+			<div class="row align-items-center">
+				<div class="col">
+					<h1 class="page-header-title">
+						Menu
+					</h1>
+				</div>
+				<!-- End Col -->
+				<div class="col-auto">
+					<a class="btn btn-sm btn-dark" href="javascript:void(0)" onclick="addMenu()">
+						<i class="bi-plus-circle me-1"></i>
+						Add
+					</a>
+				</div>
+				<!-- End Col -->
+			</div>
+			<!-- End Row -->
+		</div>
+		<!-- End Page Header -->
+
+		<div class="menu-table-filters">
+			<div class="row g-3">
+				<div class="col-12 col-md-3">
+					<div class="input-group input-group-sm">
+						<div class="input-group-text">
+							<i class="bi-search"></i>
+						</div>
+						<input type="search" class="form-control menu-table-search" placeholder="Search here">
+					</div>
+				</div>
+				<div class="col-12 col-md-6 offset-md-3">
+					<div class="d-flex align-items-center gap-2">
+						<span class="ms-md-auto">Type</span>
+						<div>
+							<select class="form-select form-select-sm"
+								onchange="sowingListTable.column(2).search(this.value).draw()">
+								<option value="" selected>All</option>
+								<option value="cat">Catagory</option>
+							</select>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="table-responsive">
+			<table id="menu-table" class="table table-bordered table-nowrap table-align-middle">
+				<thead class="thead-light" align="left">
+					<tr>
+					
+						<th>Action</th>
+						<th>
+							 NAME
+						</th>
+						<th>
+                            PRICE							
+						</th>
+						<th>
+							MENU TYPE
+						</th>
+						<th>
+                           CATEGORY							
+						</th>
+						<th>
+                           MORE DETAILS							
+						</th>
+
+						
+						
+					</tr>
+				</thead>
+			     <tbody>
+				      <%menus.forEach((item)=>{%>
+						<tr class="menu-row">
+							<td>
+								<div class="dropdown">
+									<button class="btn py-0 px-2 border-0 " type="button" data-bs-toggle="dropdown"
+										aria-expanded="true">
+										<i class="bi-three-dots fs-2"></i>
+									</button>
+									<ul class="dropdown-menu dropdown-menu-end " data-popper-placement="bottom-end"
+										style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-25.6px, 29.6px, 0px);">
+										<li>
+											<button class="dropdown-item text-primary"
+												onclick="editMenu('<%= item.id %>')">
+												<i class="bi-pencil-square me-1 align-middle"></i> Update
+											</button>
+										</li>
+										<li>
+											<button class="dropdown-item text-danger"
+												onclick="confirmDelete('<%= item.id %>')">
+												<i class="bi-trash me-1 align-middle"></i> Delete
+											</button>
+										</li>
+									</ul>
+								</div>
+							</td>
+							<td>
+								<%= item.name%>
+							</td>
+							<td>
+								Rs. <%= item.price%>
+							</td>
+							<td class="<%= item.menutype === 'Veg' ? 'text-success' : 'text-danger' %>">
+								<%= item.menutype %>
+							</td>
+							<td>
+								<%= item.menuCategory.name%>
+							</td>
+							<td>
+								<a style="cursor: pointer;" onclick="viewMoreMenu('<%= item.id%>')" class="btn btn-sm btn-dark" >view</a>
+							</td>
+						 </tr>
+					  <%})%>
+				 </tbody>
+			</table>
+		</div>
+
+		<div class="menu-table-footer"></div>
+	</div>
+	<!-- End Content -->
+
+	<%- include('./footer.ejs');%>
+
+		<script>
+			let customerListTable = false;
+			customerListTable = $('#menu-table').DataTable({
+				lengthChange: true,
+				columnDefs: [{
+					targets: [0,],
+					orderable: false,
+				}],
+				order: [
+					[1, 'desc'],
+					[0, 'desc']
+				],
+				initComplete: function (settings, json) {
+					$('.dataTables_filter').hide();
+					$('.menu-table-footer').append($('#menu-table_wrapper .row:last-child()')).find('.previous').addClass('ms-md-auto');
+					$('.dataTables_info').before($('.dataTables_length').find('label').attr('class', 'd-inline-flex text-nowrap align-items-center gap-2'));
+					$('.menu-table-search').on('input', function () {
+						customerListTable.search(this.value).draw();
+					});
+					this.api().table().buttons().container().find('.btn-secondary').removeClass('btn-secondary');
+					this.api().table().buttons().container().appendTo($('.menu-table-filters .export-buttons'));
+				},
+				buttons: [{
+					extend: 'collection',
+					text: '<i class="bi bi-cloud-download-fill"></i>',
+					className: 'btn-sm btn-outline-primary',
+					buttons: [{
+						extend: 'copy',
+						text: '<i class="bi-clipboard2-check dropdown-item-icon"></i> Copy'
+					},
+					{
+						extend: 'excel',
+						text: '<i class="bi-filetype-xlsx dropdown-item-icon"></i> Excel'
+					},
+					{
+						extend: 'csv',
+						text: '<i class="bi-filetype-csv dropdown-item-icon"></i> CSV'
+					},
+					{
+						extend: 'pdf',
+						text: '<i class="bi-filetype-pdf dropdown-item-icon"></i> PDF'
+					},
+					{
+						extend: 'print',
+						text: '<i class="bi-printer dropdown-item-icon"></i> Print'
+					}
+					]
+				}],
+			});
+		</script>

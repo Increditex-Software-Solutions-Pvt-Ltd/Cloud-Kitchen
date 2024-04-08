@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"
+        integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css"
+        integrity="sha512-6lLUdeQ5uheMFbWm3CP271l14RsX1xtx+J5x2yeIDkkiBpeVTNhTqijME7GgRKKi6hCqovwCoBTlRBEC20M8Mg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/user/css/style.css">
+</head>
+
+<body>
+    <div class="position-relative">
+        <div class="door left-door" id="leftDoor">
+            <img src="/user/img/Door-left.png" alt="Left Door Image">
+        </div>
+        <div class="door right-door" id="rightDoor">
+            <img src="/user/img/Door-right.png" alt="Right Door Image">
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white d-none">
+        <div class="container-fluid">
+            <a href="" class="navbar-brand">
+                <img src="/user/img/logo.jpg" class="img-fluid" width="100px" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            <div class="collapse navbar-collapse navbarlinks">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="/about" class="nav-link">About Us</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Services <span class="me-3"><i class="fas fa-chevron-down icon-small"></i></span>
+                        </a>
+                        <ul class="dropdown-menu navbarmenus rounded-0 shadow-sm">
+                            <li class="mx-1"><a class="dropdown-item" href="/dinein">Dine in</a></li>
+                            <li class="mx-1"><a class="dropdown-item" href="/dineout">Dine out</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Menu <span class="me-3"><i class="fas fa-chevron-down icon-small"></i></span>
+                        </a>
+                        <ul class="dropdown-menu vegnonvegmenus rounded-0 shadow-sm">
+                            <li class="mx-1"><a class="dropdown-item" href="/vegmenu">Veg</a></li>
+                            <li class="mx-1"><a class="dropdown-item" href="/nonvegmenu">Non veg</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <main>
+        <section class="mainbanner position-relative">
+            <img src="/user/img/meinbanner.jpg" class="w-100 vh-100" alt="">
+            <div class="overlay"></div>
+            <div class="banner-content text-white">
+                <h2 class="display-3 animation-fade"><%= heading%></h2>
+            </div>
+        </section>
+        <section class="intro mb-5">
+            <div class="row w-100 d-flex align-items-center">
+                <div class="col-md-6 col-sm-12 col-12">
+                    <div class="bg-main-gred intotop text-white p-5 p-md-5">
+                        <div class="container">
+                            <h3 class="my-4"><%= serviceheading%></h3>
+                            <p class="normal" style="text-align: justify;"><%= servicedesc%></p>
+                        </div>
+                    </div>
+                    <div class="bg-black intodown text-white p-5 p-md-5">
+                        <div class="container">
+                            <p class="normal" style="text-align: justify;"><%=serviceshortinfo%></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-12">
+                    <div class="px-2 px-sm-1 px-md-5">
+                        <div class="container">
+                            <h4 class="my-4 mb-my-3">EXPLORING DISHES</h4>
+                            <div class="row menuslider d-flex justify-content-center">
+                                <% popularDishes.forEach(imageURL => { %>
+                                    <div class="col-12 col-sm-12">
+                                        <div class="menuimg">
+                                            <img src="<%= imageURL %>" class="img-fluid" alt="">
+                                        </div>
+                                    </div>
+                                <% }); %>
+                            </div>
+
+                            <div class="videobox" data-video-id="s2BTyC4O_1U">
+                                <img src="<%=youtubethumbnail%>" class="img-fluid thumbnail"
+                                    alt="">
+                                <div class="boxhover">
+                                </div>
+                                <div class="play-icon">
+                                    <img src="/user/img/play-button.png" class="img-fluid" width="70px" alt="">
+                                </div>
+                                <div class="video-iframe">
+                                    <iframe 
+                                        src="<%=youtubelink%>"
+                                        title="YouTube video player" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+      
+        <section class="topdishes my-5 py-5 bg-semilight">
+            <div class="container">
+                <h4 class="text-dark  text-center my-4">OUR TOP DISHES</h4>
+
+                <div id="topdishes" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <% topdishes.forEach((dish, index) => { %>
+                            <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                                <div class="row d-flex align-items-center justify-content-center">
+                                    <div class="col-md-7 col-sm-12 col-12">
+                                        <div class="dishtop d-flex justify-content-center ms-4">
+                                            <img src="<%= dish.dishimage %>" class="img-fluid" alt="<%= dish.name %>">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 col-sm-12 col-12">
+                                        <div class="dishspeciality d-flex justify-content-center flex-column">
+                                            <h3 class="text-dark text-center text-md-start fw-normal"><%= dish.dishname %></h3>
+                                            <span class="text-cement text-center text-md-start fs-4"><%= 'Rs.' + dish.dishprice %></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#topdishes"
+                        data-bs-slide="prev">
+                        <i class="bi bi-arrow-left-circle fs-2 text-dark"></i>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#topdishes"
+                        data-bs-slide="next">
+                        <i class="bi bi-arrow-right-circle fs-2 text-dark"></i>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="testimonils my-5 py-5">
+            <div class="container">
+                <h3 class="text-dark text-center my-4">What our customers say</h3>
+                <div class="row testi">
+                    <div class="col-md-6">
+                        <div class="card p-2 bg-semilight border-0 shadow-sm" style="width: 98%;">
+                            <div class="card-body">
+                                <p class="normal fw-normal" style="font-style: italic;">"Lorem ipsum dolor sit amet
+                                    consectetur adipisicing elit. Error, sunt sint quis, molestias dolorum soluta ab
+                                    fugiat adipisci cum voluptates rem illum atque praesentium. Aspernatur eaque rerum
+                                    officia porro assumenda."</p>
+                                <div class="d-flex align-items-center">
+                                    <span class="text-secondary cusreview fs-5">Marry show</span>
+                                    <img src="/img/quote.png" class="img-fluid" width="50px" alt="">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card p-2 bg-semilight border-0 shadow-sm" style="width: 98%;">
+                            <div class="card-body">
+                                <p class="normal fw-normal" style="font-style: italic;">"Lorem ipsum dolor sit amet
+                                    consectetur adipisicing elit. Error, sunt sint quis, molestias dolorum soluta ab
+                                    fugiat adipisci cum voluptates rem illum atque praesentium. Aspernatur eaque rerum
+                                    officia porro assumenda."</p>
+                                <div class="d-flex align-items-center">
+                                    <span class="text-secondary cusreview fs-5">Martin garix</span>
+                                    <img src="/img/quote.png" class="img-fluid" width="50px" alt="">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card p-2 bg-semilight border-0 shadow-sm" style="width: 98%;">
+                            <div class="card-body">
+                                <p class="normal fw-normal" style="font-style: italic;">"Lorem ipsum dolor sit amet
+                                    consectetur adipisicing elit. Error, sunt sint quis, molestias dolorum soluta ab
+                                    fugiat adipisci cum voluptates rem illum atque praesentium. Aspernatur eaque rerum
+                                    officia porro assumenda."</p>
+                                <div class="d-flex align-items-center">
+                                    <span class="text-secondary cusreview fs-5">Marry show</span>
+                                    <img src="/img/quote.png" class="img-fluid" width="50px" alt="">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card p-2 bg-semilight border-0 shadow-sm" style="width: 98%;">
+                            <div class="card-body">
+                                <p class="normal fw-normal" style="font-style: italic;">"Lorem ipsum dolor sit amet
+                                    consectetur adipisicing elit. Error, sunt sint quis, molestias dolorum soluta ab
+                                    fugiat adipisci cum voluptates rem illum atque praesentium. Aspernatur eaque rerum
+                                    officia porro assumenda."</p>
+                                <div class="d-flex align-items-center">
+                                    <span class="text-secondary cusreview fs-5">Marry show</span>
+                                    <img src="/img/quote.png" class="img-fluid" width="50px" alt="">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact mt-5">
+            <div class="row w-100 contactus">
+                <div class="col-md-6 col-sm-12">
+                    <div class="bg-black p-5 contactdown">
+                        <h4 class="text-white">CONTACT US</h4>
+                        <p class="text-semilight normal my-5">You Ask. We Listen. Together let us create the best! Write
+                            to us
+                            now for any restaurant/hotel consulting or management services and restaurant professional
+                            advice.</p>
+                        <span class="text-semilight normal pb-5">+91-9876543210</span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 p-0">
+                    <form action="" method="" class="p-3 py-md-5" id="enquiryForm">
+                        <div class="mb-2">
+                            <label for="" class="form-label">Name</label>
+                            <input type="text" class="form-control form-control-lg rounded-0"
+                                placeholder="your name" name="fullname" required>
+                        </div>
+                        <div class="mb-2">
+                            <label for="" class="form-label">Email</label>
+                            <input type="email" class="form-control form-control-lg rounded-0"
+                                placeholder="your email" name="email" required>
+                        </div>
+                        <div class="mb-2">
+                            <label for="" class="form-label">Phone</label>
+                            <input type="number" class="form-control form-control-lg rounded-0"
+                                placeholder="your phone" name="phone" required>
+                        </div>
+                        <div class="mb-2">
+                            <label for="" class="form-label">Message</label>
+                            <textarea class="form-control form-control-lg rounded-0"
+                                placeholder="your message" name="message" required></textarea>
+                        </div>
+                        <div>
+                            <button class="btn submitbtn" type="submit" id="submitButton" disabled>submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <!-- <section class="contact mt-5">
+            <div class="row contactus">
+                <div class="col-md-6">
+                    <div class="bg-black p-5 contactdown">
+                        <h4 class="text-white">CONTACT US</h4>
+                        <p class="text-semilight normal my-5">You Ask. We Listen. Together let us create the best! Write
+                            to us
+                            now for any restaurant/hotel consulting or management services and restaurant professional
+                            advice.</p>
+                        <span class="text-semilight normal pb-5">+91-9876543210</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="">
+                        <div class="row w-100">
+                            <div class="col-md-11 p-0">
+                                <form action="" class="">
+                                    <div class="mb-2">
+                                        <label for="" class="form-label">Name</label>
+                                        <input type="text" class="form-control form-control-lg rounded-0"
+                                            placeholder="your name" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="" class="form-label">Email</label>
+                                        <input type="email" class="form-control form-control-lg rounded-0"
+                                            placeholder="your email" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="" class="form-label">Phone</label>
+                                        <input type="number" class="form-control form-control-lg rounded-0"
+                                            placeholder="your phone" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="" class="form-label">Message</label>
+                                        <textarea class="form-control form-control-lg rounded-0"
+                                            placeholder="your message" required></textarea>
+                                    </div>
+                                    <div>
+                                        <button class="btn submitbtn" type="button">submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section> -->
+
+        <a href="https://wa.me/919322793766" target="_blank" class="wpchat">
+            <img src="/user/img/whatsapp.png" class="img-fluid" width="45px" alt="whatsapp">
+        </a>
+    </main>
+
+
+    <footer class="bg-main py-3">
+        <div class="container d-flex align-items-center justify-content-between flex-column flex-md-row">
+            <button class="btn btn-outline-dark mb-2 mb-sm-0" data-bs-target="#sitemap"
+                data-bs-toggle="modal">sitemap</button>
+            <span class="text-dark mb-2 mb-2 mb-sm-0">Copyright 2023 © cloud kiten web,Nashik</span>
+            <div class="social mb-2 mb-sm-0">
+                <a href="" class="btn socialbtn mx-1"><i class="fab fa-instagram"></i></a>
+                <a href="" class="btn socialbtn mx-1"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </footer>
+
+
+    <div class="modal sitemapmodal" id="sitemap" style="transition: all 1s ease-in;">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header border-0 position-relative p-0">
+                    <div class="modal-header-left">
+
+                    </div>
+                    <button class="btn-close p-4" data-bs-dismiss="modal">
+                    </button>
+
+                </div>
+                <div class="modal-body d-flex flex-column flex-sm-column flex-md-row p-0">
+                    <div class="modal-body-left d-flex justify-content-center align-items-center">
+                        <span class="text-dark display-3 sitemapheader">SITEMAP</span>
+                    </div>
+                    <div class="d-flex flex-column w-65">
+                        <div class="site_feature ps-5" id="feature1">
+                            <p class="featurename text-cement border-bm border-bottom mb-1">
+                                <span class="">1.</span>
+                                DINE IN
+                            </p>
+                            <p class="site_featurename mb-0">
+                                <span class="site_paragraph_number">1.
+                                    <span class="midnumber">1</span>
+                                    Lorem, ipsum dolor.
+                                </span>
+                            </p>
+                            <p class="site_featurename mb-0">
+                                <span class="site_paragraph_number">1.
+                                    <span class="midnumber">2</span>
+                                    Lorem, ipsum dolor.
+                                </span>
+                            </p>
+                            <p class="site_featurename mb-0">
+                                <span class="site_paragraph_number">1.
+                                    <span class="midnumber">3</span>
+                                    Lorem, ipsum dolor.
+                                </span>
+                            </p>
+                        </div>
+                        <div class="site_feature mt-3 ps-5" id="feature2">
+                            <p class="featurename text-cement border-bm border-bottom mb-1">
+                                <span class="">2.</span>
+                                DINE OUT
+                            </p>
+                            <p class="site_featurename mb-0">
+                                <span class="site_paragraph_number">2.
+                                    <span class="midnumber">1</span>
+                                    Lorem, ipsum dolor.
+                                </span>
+                            </p>
+                            <p class="site_featurename mb-0">
+                                <span class="site_paragraph_number">2.
+                                    <span class="midnumber">2</span>
+                                    Lorem, ipsum dolor.
+                                </span>
+                            </p>
+                            <p class="site_featurename mb-0">
+                                <span class="site_paragraph_number">2.
+                                    <span class="midnumber">3</span>
+                                    Lorem, ipsum dolor.
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" style="visibility: hidden;" id="offcanvasExampleLabel" >Offcanvas</h5>
+          <button  class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a href="" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="/about.html" class="nav-link">About Us</a></li>
+               
+            </ul>
+          <div class="dropdown mt-3">
+            <a class="nav-link dropdown-toggle"  data-bs-toggle="dropdown">
+              Services
+            </a>
+            <ul class="dropdown-menu">
+                <li class="mx-1"><a class="dropdown-item" href="/dinein.html">Dine in</a></li>
+                <li class="mx-1"><a class="dropdown-item" href="/dineout.html">Dine out</a></li>
+            </ul>
+          </div>
+          <div class="dropdown mt-3">
+            <a class="nav-link dropdown-toggle"  data-bs-toggle="dropdown">
+              Menu
+            </a>
+            <ul class="dropdown-menu">
+                <li class="mx-1"><a class="dropdown-item" href="/vegmenu.html">Veg</a></li>
+                <li class="mx-1"><a class="dropdown-item" href="#">Non veg</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/1c9005996e.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"
+        integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/user/js/main.js"></script>
+    <script>
+        $('.menuslider').slick({
+            dots: true,
+            autoplay: true,
+            infinite: true,
+            speed: 600,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplaySpeed: 1000,
+            centerMode: true,
+            centerPadding: '30',
+            arrows: false,
+            focusOnSelect: true,
+        });
+        $('.topdishslider').slick({
+            dots: false,
+            autoplay: true,
+            infinite: true,
+            speed: 1000,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplaySpeed: 3000,
+            centerMode: true,
+            centerPadding: '30',
+            arrows: true,
+            focusOnSelect: true,
+        });
+        $('.testi').slick({
+            dots: false,
+            autoplay: true,
+            infinite: true,
+            speed: 1000,
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            autoplaySpeed: 3000,
+            centerMode: true,
+            centerPadding: '38',
+            arrows: false,
+            focusOnSelect: true,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        infinite: true,
+                    }
+                },
+                {
+                    breakpoint: 767.5,
+                    settings: {
+                        centerPadding: '-7',
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                },
+            ]
+        });
+    </script>
+</body>
+
+</html>
